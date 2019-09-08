@@ -1,0 +1,24 @@
+apply plugin: 'java-library'
+apply plugin: 'maven'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.aervon.java.support:rpc-annotation:1.0.0'
+    api 'com.google.code.gson:gson:2.8.5'
+    api 'io.netty:netty-all:5.0.0.Alpha1'
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = 'com.aervon.java.support'
+            pom.artifactId = 'rpc-core'
+            pom.version = '1.0.0'
+            //文件发布到下面目录
+            repository(url: uri('../repo'))
+        }
+    }
+}
