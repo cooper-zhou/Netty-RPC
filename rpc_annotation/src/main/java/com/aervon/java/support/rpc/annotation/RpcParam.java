@@ -25,5 +25,7 @@ public @interface RpcParam {
     /**
      * 如果参数类型不是基础类型，需要传入参数类型的全类名
      */
-    String type() default "";
+    Class<?> type() default Object.class;
+
+    Class<?> generic() default Object.class;
 }

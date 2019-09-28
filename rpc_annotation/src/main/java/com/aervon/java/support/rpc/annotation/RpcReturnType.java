@@ -25,5 +25,7 @@ public @interface RpcReturnType {
     /**
      * 如果返回类型不是基础类型，需要传入返回类型的全类名
      */
-    String type() default "";
+    Class<?> type() default Object.class;
+
+    Class<?> generic() default Object.class;
 }

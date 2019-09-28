@@ -11,18 +11,18 @@ import java.util.List;
 /**
  * <p> Project: NettyRpc </p>
  * <p> Version: 1.0 </p>
- * <p> File: NettyService.java </p>
+ * <p> File: UiAutomator.java </p>
  * <p> Description: XXXXXXXXXX. </p>
  * <p> Author: Aervon </p>
  * <p> Date: 2019/9/8 </p>
  */
 @RpcService(ip = "127.0.0", port = 8094)
-public interface NettyService {
+public interface UiAutomator {
 
-    @RpcMethod("UIOperate.uiKeyClick")
+    @RpcMethod
     boolean uiKeyClick(@RpcParam int x, @RpcParam int y) throws RemoteException;
 
-    @RpcMethod("Data.getUserPhoneList")
-    @RpcReturnType(type = "java.util.List")
-    List<String> getUserPhoneList(@RpcParam(type = "java.lang.String") String userId) throws RemoteException;
+    @RpcMethod
+    @RpcReturnType(type = List.class, generic = String.class)
+    List<String> getUserPhoneList(@RpcParam(type = String.class) String userId) throws RemoteException;
 }

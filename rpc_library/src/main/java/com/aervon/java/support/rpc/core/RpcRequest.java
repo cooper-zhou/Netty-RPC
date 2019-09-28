@@ -14,10 +14,11 @@ public class RpcRequest {
 
     private String jsonrpc;
     private String method;
+    private String service;
     private Map<String, Object> params;
-    private String id;
 
-    public RpcRequest(String method, Map<String, Object> params) {
+    public RpcRequest(String service, String method, Map<String, Object> params) {
+        this.service = service;
         this.method = method;
         this.params = params;
     }
@@ -38,19 +39,19 @@ public class RpcRequest {
         this.method = method;
     }
 
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
     public Map<String, Object> getParams() {
         return params;
     }
 
     public void setParams(Map<String, Object> params) {
         this.params = params;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

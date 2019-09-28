@@ -1,13 +1,11 @@
 package com.aervon.java.support.rpc.processor.factory;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.TypeKind;
 
 /**
  * <p> Project: NettyRpc </p>
@@ -39,30 +37,5 @@ public abstract class RpcBaseFactory implements ClassFactory {
     @Override
     public String getPackageName() {
         return mPackageName;
-    }
-
-    Type getPrimaryType(TypeKind kind) {
-        switch (kind) {
-            case BOOLEAN:
-                return boolean.class;
-            case BYTE:
-                return byte.class;
-            case SHORT:
-                return short.class;
-            case INT:
-                return int.class;
-            case LONG:
-                return long.class;
-            case CHAR:
-                return char.class;
-            case FLOAT:
-                return float.class;
-            case DOUBLE:
-                return double.class;
-            case VOID:
-                return void.class;
-            default:
-                return Object.class;
-        }
     }
 }

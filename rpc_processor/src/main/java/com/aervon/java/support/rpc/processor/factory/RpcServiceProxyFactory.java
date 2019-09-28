@@ -9,9 +9,11 @@ import com.aervon.java.support.rpc.core.RpcBinder;
 import com.aervon.java.support.rpc.core.RpcRequest;
 import com.aervon.java.support.rpc.core.RpcResponse;
 import com.aervon.java.support.rpc.core.binder.RpcNettyBinder;
+import com.aervon.java.support.rpc.processor.utils.ClassNameExtension;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ import javax.lang.model.type.TypeKind;
 public class RpcServiceProxyFactory extends RpcBaseFactory {
 
     private final static String INNER_CLASS_NAME = "Proxy";
-    private final static String RPC_BINDER_CLASS = RpcNettyBinder.class.getCanonicalName();
+    private final static Class RPC_BINDER_CLASS = RpcNettyBinder.class;
 
     RpcServiceProxyFactory(PackageElement packageElement, TypeElement typeElement) {
         super(packageElement, typeElement);
@@ -59,19 +61,21 @@ public class RpcServiceProxyFactory extends RpcBaseFactory {
                     .addModifiers(Modifier.PUBLIC);
             // 处理返回值
             RpcReturnType rpcReturnType = methodElement.getAnnotation(RpcReturnType.class);
-            if (rpcReturnType != null && !"".equals(rpcReturnType.type())) {
-                methodSpecBuilder.returns(ClassName.bestGuess(rpcReturnType.type()));
+            TypeKind returnTypeKind = methodElement.getReturnType().getKind();
+            if (returnTypeKind.isPrimitive()) {
+                methodSpecBuilder.returns(ClassNameExtension.bestGuessPrimaryType(returnTypeKind));
             } else {
-                methodSpecBuilder.returns(getPrimaryType(methodElement.getReturnType().getKind()));
+                methodSpecBuilder.returns(ClassNameExtension.bestGuess(rpcReturnType));
             }
             // 处理参数
             List<? extends VariableElement> variableElements = methodElement.getParameters();
             for (VariableElement variableElement : variableElements) {
                 RpcParam rpcParam = variableElement.getAnnotation(RpcParam.class);
-                if (rpcParam != null && !"".equals(rpcParam.type())) {
-                    methodSpecBuilder.addParameter(ClassName.bestGuess(rpcParam.type()), variableElement.getSimpleName().toString());
+                TypeKind typeKind = variableElement.asType().getKind();
+                if (typeKind.isPrimitive()) {
+                    methodSpecBuilder.addParameter(ClassNameExtension.bestGuessPrimaryType(typeKind), variableElement.getSimpleName().toString());
                 } else {
-                    methodSpecBuilder.addParameter(getPrimaryType(variableElement.asType().getKind()), variableElement.getSimpleName().toString());
+                    methodSpecBuilder.addParameter(ClassNameExtension.bestGuess(rpcParam), variableElement.getSimpleName().toString());
                 }
             }
             // 处理异常
@@ -89,37 +93,41 @@ public class RpcServiceProxyFactory extends RpcBaseFactory {
      *     Map<String, Object> params = new HashMap<>();
      *     params.put("x", x);
      *     RpcBinder rpcBinder = new RpcNettyBinder(ip, port);
+     *     RpcRequest request = new RpcRequest("Service", "Method", params);
      *     RpcResponse response = rpcBinder.transact(request);
      *     if (response.getError() != null) {
      *       throw new RemoteException(response.getError());
      *     }
      *     return (String) response.getResult();
      * </p>
+     * <p>
+     *     占位符介绍： https://blog.csdn.net/IO_Field/article/details/89355941#S_1065
+     * </p>
      */
     private CodeBlock generateTransactCode(ExecutableElement methodElement, List<? extends VariableElement> variableElements) {
         RpcService rpcService = mServiceClassElement.getAnnotation(RpcService.class);
-        RpcMethod rpcMethod = methodElement.getAnnotation(RpcMethod.class);
         CodeBlock.Builder codeBuilder = CodeBlock.builder();
-        codeBuilder.add(Map.class.getCanonicalName() + "<String, Object> params = new " + HashMap.class.getCanonicalName() + "<>();\n");
+        codeBuilder.add("$T<String, Object> params = new $T<>();\n", Map.class, HashMap.class);
         for (VariableElement element : variableElements) {
-            codeBuilder.add("params.put(\"" + element.getSimpleName() + "\", " + element.getSimpleName() + ");\n");
+            codeBuilder.add("params.put($S, $L);\n", element.getSimpleName(), element.getSimpleName());
         }
-        codeBuilder.add(RpcBinder.class.getCanonicalName() + " rpcBinder = new " + RPC_BINDER_CLASS + "(\"" + rpcService.ip() +"\", " + rpcService.port() + ");\n");
-        codeBuilder.add(RpcRequest.class.getCanonicalName() + " request = new " + RpcRequest.class.getCanonicalName() + "(\"" + rpcMethod.value() + "\", params);\n");
-        codeBuilder.add(RpcResponse.class.getCanonicalName() + " response = rpcBinder.transact(request);\n");
+        codeBuilder.add("$T rpcBinder = new $T($S, $L);\n", RpcBinder.class, RPC_BINDER_CLASS, rpcService.ip(), rpcService.port());
+        codeBuilder.add("$T request = new $T($S, $S, params);\n", RpcRequest.class, RpcRequest.class, mServiceClassElement.getSimpleName(), methodElement.getSimpleName());
+        codeBuilder.add("$T response = rpcBinder.transact(request);\n", RpcResponse.class);
         codeBuilder.add("if (response.hasError()) {\n");
-        codeBuilder.add("throw new RemoteException(response.getError());\n");
+        codeBuilder.add("  throw new RemoteException(response.getError());\n");
         codeBuilder.add("}\n");
         if (methodElement.getReturnType().getKind() != TypeKind.VOID) {
             // 有返回值
             RpcReturnType rpcReturnType = methodElement.getAnnotation(RpcReturnType.class);
-            String returnType;
-            if (rpcReturnType != null && !"".equals(rpcReturnType.type())) {
-                returnType = rpcReturnType.type();
+            TypeName returnType;
+            TypeKind typeKind = methodElement.getReturnType().getKind();
+            if (typeKind.isPrimitive()) {
+                returnType = ClassNameExtension.bestGuessPrimaryType(typeKind);
             } else {
-                returnType = getPrimaryType(methodElement.getReturnType().getKind()).toString();
+                returnType = ClassNameExtension.bestGuess(rpcReturnType);
             }
-            codeBuilder.add("return (" + returnType + ") response.getResult();\n");
+            codeBuilder.add("return ($L) response.getResult();\n", returnType);
         }
         return codeBuilder.build();
     }

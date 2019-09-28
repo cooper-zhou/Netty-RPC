@@ -6,6 +6,7 @@ dependencies {
     api 'com.aervon.java.support:rpc-annotation:1.0.0'
     api 'com.google.code.gson:gson:2.8.5'
     api 'io.netty:netty-all:5.0.0.Alpha1'
+    api 'org.json:json:20180130'
 }
 
 sourceCompatibility = "7"
