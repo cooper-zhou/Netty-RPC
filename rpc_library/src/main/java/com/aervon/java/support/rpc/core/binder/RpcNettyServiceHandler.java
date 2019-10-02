@@ -1,5 +1,6 @@
 package com.aervon.java.support.rpc.core.binder;
 
+import com.aervon.java.support.rpc.core.Constants;
 import com.aervon.java.support.rpc.core.RpcRequest;
 import com.aervon.java.support.rpc.core.RpcResponse;
 import com.aervon.java.support.rpc.core.utils.JsonUtils;
@@ -47,7 +48,8 @@ public abstract class RpcNettyServiceHandler extends SimpleChannelInboundHandler
     /**
      * 将RPC回复转换成HTTP回复，并发送
      */
-    void sendResponse(ChannelHandlerContext ctx, RpcResponse rpcResponse) {
+    protected void sendResponse(ChannelHandlerContext ctx, RpcResponse rpcResponse) {
+        rpcResponse.setJsonrpc(Constants.JSON_RPC_VERSION);
         String msg = JsonUtils.toJson(rpcResponse);
         FullHttpResponse response = new DefaultFullHttpResponse(
                 HttpVersion.HTTP_1_0, HttpResponseStatus.OK, Unpooled.wrappedBuffer(msg.getBytes(CharsetUtil.UTF_8)));

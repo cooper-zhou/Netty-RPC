@@ -13,7 +13,6 @@ public class RpcResponse<T> {
     private String jsonrpc;
     private T result;
     private String error;
-    private String id;
 
     public String getJsonrpc() {
         return jsonrpc;
@@ -37,14 +36,6 @@ public class RpcResponse<T> {
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public boolean hasError() {

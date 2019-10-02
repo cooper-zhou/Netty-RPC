@@ -1,5 +1,6 @@
 package com.aervon.java.support.rpc.core.utils;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
@@ -18,8 +19,8 @@ public class ParamWrapper {
         this.paramsJson = JsonUtils.toJson(params);
     }
 
-    public <T> T get(String key, Class<T> clazz) {
+    public <T> T get(String key, Type type) {
         String keyObject = JsonUtils.getKeyAsString(paramsJson, key);
-        return JsonUtils.fromJson(keyObject, clazz);
+        return JsonUtils.fromJson(keyObject, type);
     }
 }

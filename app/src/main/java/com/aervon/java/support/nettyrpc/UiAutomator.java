@@ -16,13 +16,20 @@ import java.util.List;
  * <p> Author: Aervon </p>
  * <p> Date: 2019/9/8 </p>
  */
-@RpcService(ip = "127.0.0", port = 8094)
+@RpcService(ip = "127.0.0.1", port = 8094)
 public interface UiAutomator {
 
     @RpcMethod
     boolean uiKeyClick(@RpcParam int x, @RpcParam int y) throws RemoteException;
 
     @RpcMethod
+    @RpcReturnType(type = String.class)
+    String getUserPhone(@RpcParam(type = String.class) String userId) throws RemoteException;
+
+    @RpcMethod
     @RpcReturnType(type = List.class, generic = String.class)
-    List<String> getUserPhoneList(@RpcParam(type = String.class) String userId) throws RemoteException;
+    List<String> getUserPhoneList(@RpcParam(type = List.class, generic = String.class) List<String> userIds) throws RemoteException;
+
+    @RpcMethod
+    void sleep() throws RemoteException;
 }

@@ -1,6 +1,5 @@
 package com.aervon.java.support.rpc.processor.factory;
 
-import com.aervon.java.support.rpc.annotation.RpcMethod;
 import com.aervon.java.support.rpc.annotation.RpcParam;
 import com.aervon.java.support.rpc.annotation.RpcReturnType;
 import com.aervon.java.support.rpc.annotation.RpcService;
@@ -9,6 +8,7 @@ import com.aervon.java.support.rpc.core.RpcBinder;
 import com.aervon.java.support.rpc.core.RpcRequest;
 import com.aervon.java.support.rpc.core.RpcResponse;
 import com.aervon.java.support.rpc.core.binder.RpcNettyBinder;
+import com.aervon.java.support.rpc.processor.utils.CharsetExtension;
 import com.aervon.java.support.rpc.processor.utils.ClassNameExtension;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
@@ -62,7 +62,7 @@ public class RpcServiceProxyFactory extends RpcBaseFactory {
             // 处理返回值
             RpcReturnType rpcReturnType = methodElement.getAnnotation(RpcReturnType.class);
             TypeKind returnTypeKind = methodElement.getReturnType().getKind();
-            if (returnTypeKind.isPrimitive()) {
+            if (returnTypeKind.isPrimitive() || returnTypeKind == TypeKind.VOID) {
                 methodSpecBuilder.returns(ClassNameExtension.bestGuessPrimaryType(returnTypeKind));
             } else {
                 methodSpecBuilder.returns(ClassNameExtension.bestGuess(rpcReturnType));
@@ -115,7 +115,7 @@ public class RpcServiceProxyFactory extends RpcBaseFactory {
         codeBuilder.add("$T request = new $T($S, $S, params);\n", RpcRequest.class, RpcRequest.class, mServiceClassElement.getSimpleName(), methodElement.getSimpleName());
         codeBuilder.add("$T response = rpcBinder.transact(request);\n", RpcResponse.class);
         codeBuilder.add("if (response.hasError()) {\n");
-        codeBuilder.add("  throw new RemoteException(response.getError());\n");
+        codeBuilder.add(CharsetExtension.CODE_INDENT + "throw new RemoteException(response.getError());\n");
         codeBuilder.add("}\n");
         if (methodElement.getReturnType().getKind() != TypeKind.VOID) {
             // 有返回值
@@ -127,7 +127,7 @@ public class RpcServiceProxyFactory extends RpcBaseFactory {
             } else {
                 returnType = ClassNameExtension.bestGuess(rpcReturnType);
             }
-            codeBuilder.add("return ($L) response.getResult();\n", returnType);
+            codeBuilder.add("return ($T) response.getResult();\n", returnType);
         }
         return codeBuilder.build();
     }

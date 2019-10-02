@@ -61,6 +61,22 @@ public class ClassNameExtension {
         return ClassName.bestGuess(className);
     }
 
+    public static ClassName bestGuessGeneric(RpcParam rpcParam) {
+        if (rpcParam == null) {
+            return ClassName.OBJECT;
+        }
+        String className;
+        try {
+            Class<?> type = rpcParam.generic();
+            className = type.getCanonicalName();
+        } catch (MirroredTypeException mte) {
+            DeclaredType classTypeMirror = (DeclaredType) mte.getTypeMirror();
+            TypeElement classTypeElement = (TypeElement) classTypeMirror.asElement();
+            className = classTypeElement.getQualifiedName().toString();
+        }
+        return ClassName.bestGuess(className);
+    }
+
     public static ClassName bestGuess(RpcReturnType rpcReturnType) {
         if (rpcReturnType == null) {
             return ClassName.OBJECT;
@@ -68,6 +84,22 @@ public class ClassNameExtension {
         String className;
         try {
             Class<?> type = rpcReturnType.type();
+            className = type.getCanonicalName();
+        } catch (MirroredTypeException mte) {
+            DeclaredType classTypeMirror = (DeclaredType) mte.getTypeMirror();
+            TypeElement classTypeElement = (TypeElement) classTypeMirror.asElement();
+            className = classTypeElement.getQualifiedName().toString();
+        }
+        return ClassName.bestGuess(className);
+    }
+
+    public static ClassName bestGuessGeneric(RpcReturnType rpcReturnType) {
+        if (rpcReturnType == null) {
+            return ClassName.OBJECT;
+        }
+        String className;
+        try {
+            Class<?> type = rpcReturnType.generic();
             className = type.getCanonicalName();
         } catch (MirroredTypeException mte) {
             DeclaredType classTypeMirror = (DeclaredType) mte.getTypeMirror();
