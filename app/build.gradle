@@ -32,7 +32,7 @@ dependencies {
 //    implementation project(':rpc_annotation')
 //    annotationProcessor project(':rpc_processor')
 
-    implementation 'com.aervon.java.support:rpc-core:1.0.0'
-    implementation 'com.aervon.java.support:rpc-annotation:1.0.0'
-    annotationProcessor 'com.aervon.java.support:rpc-compiler:1.0.2'
+    implementation 'cn.kyle.support:rpc-core:1.0.0'
+    implementation 'cn.kyle.support:rpc-annotation:1.0.0'
+    annotationProcessor 'cn.kyle.support:rpc-compiler:1.0.2'
 }

@@ -11,7 +11,7 @@ targetCompatibility = "7"
 uploadArchives {
     repositories {
         mavenDeployer {
-            pom.groupId = 'com.aervon.java.support'
+            pom.groupId = 'cn.kyle.support'
             pom.artifactId = 'rpc-annotation'
             pom.version = '1.0.0'
             //文件发布到下面目录
