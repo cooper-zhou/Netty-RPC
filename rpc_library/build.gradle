@@ -5,7 +5,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api 'com.aervon.java.support:rpc-annotation:1.0.0'
     api 'com.google.code.gson:gson:2.8.5'
-    api 'io.netty:netty-all:5.0.0.Alpha1'
+    api 'io.netty:netty-all:4.1.42.Final'
     api 'org.json:json:20180130'
 }
 

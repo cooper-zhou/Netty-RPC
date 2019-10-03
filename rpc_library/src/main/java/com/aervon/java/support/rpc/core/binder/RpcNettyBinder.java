@@ -120,7 +120,7 @@ public class RpcNettyBinder implements RpcBinder {
     private abstract class RpcNettyBinderHandler extends SimpleChannelInboundHandler<HttpMessage> {
 
         @Override
-        protected void messageReceived(ChannelHandlerContext ctx, HttpMessage msg) throws Exception {
+        protected void channelRead0(ChannelHandlerContext ctx, HttpMessage msg) {
             if (msg instanceof FullHttpResponse) {
                 RpcResponse rpcResponse = getResponseBody((FullHttpResponse) msg);
                 channelReceived(ctx, rpcResponse);

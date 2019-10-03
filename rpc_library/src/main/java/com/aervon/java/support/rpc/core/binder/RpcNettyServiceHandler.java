@@ -30,7 +30,7 @@ import io.netty.util.CharsetUtil;
 public abstract class RpcNettyServiceHandler extends SimpleChannelInboundHandler<HttpMessage> {
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, HttpMessage msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, HttpMessage msg) {
         if (msg instanceof FullHttpRequest) {
             RpcRequest rpcRequest = getRequestBody((FullHttpRequest) msg);
             channelReceived(ctx, rpcRequest);
