@@ -18,7 +18,8 @@ buildscript {
 allprojects {
     repositories {
         maven {
-            url uri('../repo')
+//            url uri('../repo')
+            url uri('https://raw.githubusercontent.com/kyle-android/NettyRpc/master/repo')
         }
         google()
         jcenter()

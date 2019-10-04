@@ -33,6 +33,5 @@ dependencies {
 //    annotationProcessor project(':rpc_processor')
 
     implementation 'cn.kyle.support:rpc-core:1.0.0'
-    implementation 'cn.kyle.support:rpc-annotation:1.0.0'
     annotationProcessor 'cn.kyle.support:rpc-compiler:1.0.2'
 }
