@@ -2,6 +2,17 @@
 基于Netty HTTP协议实现的轻量级RPC框架
 
 ## 1 集成说明
+## 1.1 在builde.gradle(Project)下添加仓库地址：
+```grovvy
+allprojects {
+    repositories {
+        maven {
+            url uri('https://raw.githubusercontent.com/kyle-android/NettyRpc/master/repo')
+        }
+    }
+}
+```
+## 1.2 在builde.gradle(Module)下添加依赖：
 ```grovvy
 implementation 'cn.kyle.support:rpc-core:1.0.0'
 annotationProcessor 'cn.kyle.support:rpc-compiler:1.0.2'
