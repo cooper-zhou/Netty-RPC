@@ -1,4 +1,4 @@
-# NettyRpc
+# netty-rpc
 基于Netty HTTP协议实现的轻量级RPC框架
 
 ## 1 集成说明
@@ -7,7 +7,7 @@
 allprojects {
     repositories {
         maven {
-            url uri('https://raw.githubusercontent.com/kyle-android/NettyRpc/master/repo')
+            url uri('https://raw.githubusercontent.com/kyle-android/netty-rpc/master/repo')
         }
     }
 }
