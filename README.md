@@ -1,4 +1,4 @@
-# NettyRpc
+# netty-rpc
 基于Netty HTTP协议实现的轻量级RPC框架
 
 ## 1 集成说明
