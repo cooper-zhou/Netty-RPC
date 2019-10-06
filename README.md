@@ -7,7 +7,7 @@
 allprojects {
     repositories {
         maven {
-            url uri('https://raw.githubusercontent.com/kyle-android/NettyRpc/master/repo')
+            url uri('https://raw.githubusercontent.com/kyle-android/netty-rpc/master/repo')
         }
     }
 }
