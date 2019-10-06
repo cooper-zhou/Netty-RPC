@@ -34,7 +34,7 @@ import cn.kyle.support.rpc.processor.utils.ClassNameExtension;
  * <p> Version: 1.0 </p>
  * <p> File: RpcServiceProxyFactory.java </p>
  * <p> Description: RpcService生成类的内部类Proxy. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/8 </p>
  */
 public class RpcServiceProxyFactory extends RpcBaseFactory {

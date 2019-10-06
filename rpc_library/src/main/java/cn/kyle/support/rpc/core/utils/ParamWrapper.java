@@ -8,7 +8,7 @@ import java.util.Map;
  * <p> Version: 1.0 </p>
  * <p> File: ParamWrapper.java </p>
  * <p> Description: 参数解析类. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/28 </p>
  */
 public class ParamWrapper {

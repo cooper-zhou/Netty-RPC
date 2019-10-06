@@ -26,7 +26,7 @@ import io.netty.util.CharsetUtil;
  * <p> Version: 1.0 </p>
  * <p> File: RpcNettyServiceHandler.java </p>
  * <p> Description: RPC服务端Handler. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/28 </p>
  */
 @Sharable

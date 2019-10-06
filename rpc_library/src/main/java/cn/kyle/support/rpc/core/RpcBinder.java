@@ -5,7 +5,7 @@ package cn.kyle.support.rpc.core;
  * <p> Version: 1.0 </p>
  * <p> File: RpcBinder.java </p>
  * <p> Description: RPC连接接口. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/8 </p>
  */
 public interface RpcBinder {

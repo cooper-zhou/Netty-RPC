@@ -15,7 +15,7 @@ import javax.lang.model.type.TypeKind;
  * <p> Version: 1.0 </p>
  * <p> File: ClassNameExtension.java </p>
  * <p> Description: ClassName拓展对象. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/28 </p>
  */
 public class ClassNameExtension {

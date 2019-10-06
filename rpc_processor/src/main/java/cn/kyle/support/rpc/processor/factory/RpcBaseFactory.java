@@ -12,7 +12,7 @@ import javax.lang.model.element.TypeElement;
  * <p> Version: 1.0 </p>
  * <p> File: RpcBaseFactory.java </p>
  * <p> Description: RPC相关类生成器基础类. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/8 </p>
  */
 public abstract class RpcBaseFactory implements ClassFactory {

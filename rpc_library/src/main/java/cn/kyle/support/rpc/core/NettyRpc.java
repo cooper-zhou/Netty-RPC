@@ -5,7 +5,7 @@ package cn.kyle.support.rpc.core;
  * <p> Version: 1.0 </p>
  * <p> File: NettyRpc.java </p>
  * <p> Description: Netty RPC服务调用者. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/10/3 </p>
  */
 public class NettyRpc {

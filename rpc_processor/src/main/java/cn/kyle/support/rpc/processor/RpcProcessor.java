@@ -30,7 +30,7 @@ import cn.kyle.support.rpc.processor.factory.RpcServiceFactory;
  * <p> Version: 1.0 </p>
  * <p> File: RpcProcessor.java </p>
  * <p> Description: RPC框架注解处理器. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/8 </p>
  */
 @AutoService(Processor.class)

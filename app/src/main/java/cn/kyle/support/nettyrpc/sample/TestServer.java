@@ -9,7 +9,7 @@ import cn.kyle.support.rpc.core.NettyService;
  * <p> Version: 1.0 </p>
  * <p> File: TestServer.java </p>
  * <p> Description: XXXXXXXXXX. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/10/2 </p>
  */
 public class TestServer {

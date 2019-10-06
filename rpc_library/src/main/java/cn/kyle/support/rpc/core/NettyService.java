@@ -21,7 +21,7 @@ import io.netty.handler.codec.http.HttpResponseEncoder;
  * <p> Version: 1.0 </p>
  * <p> File: NettyService.java </p>
  * <p> Description: Netty服务端启动. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/10/3 </p>
  */
 public class NettyService {

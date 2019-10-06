@@ -9,7 +9,7 @@ import javax.lang.model.element.ExecutableElement;
  * <p> Version: 1.0 </p>
  * <p> File: ClassFactory.java </p>
  * <p> Description: 类生成器. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/8 </p>
  */
 public interface ClassFactory {

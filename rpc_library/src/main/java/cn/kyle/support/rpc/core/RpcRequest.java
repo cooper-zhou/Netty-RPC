@@ -7,7 +7,7 @@ import java.util.Map;
  * <p> Version: 1.0 </p>
  * <p> File: RpcRequest.java </p>
  * <p> Description: RPC请求实体类. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/8 </p>
  */
 public class RpcRequest {

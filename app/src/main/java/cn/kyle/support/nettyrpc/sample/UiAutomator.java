@@ -13,7 +13,7 @@ import cn.kyle.support.rpc.core.RemoteException;
  * <p> Version: 1.0 </p>
  * <p> File: UiAutomator.java </p>
  * <p> Description: XXXXXXXXXX. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/8 </p>
  */
 @RpcService(ip = "127.0.0.1", port = 8094)

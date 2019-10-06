@@ -39,7 +39,7 @@ import io.netty.util.CharsetUtil;
  * <p> Version: 1.0 </p>
  * <p> File: RpcNettyBinder.java </p>
  * <p> Description: Netty实现RPC短连接. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/8 </p>
  */
 public class RpcNettyBinder implements RpcBinder {

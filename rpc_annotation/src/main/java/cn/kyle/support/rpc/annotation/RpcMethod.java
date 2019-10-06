@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * <p> Version: 1.0 </p>
  * <p> File: RpcMethod.java </p>
  * <p> Description: RPC服务方法注解. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/8 </p>
  */
 

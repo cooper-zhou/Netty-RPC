@@ -5,7 +5,7 @@ package cn.kyle.support.rpc.core;
  * <p> Version: 1.0 </p>
  * <p> File: Constants.java </p>
  * <p> Description: 常量类. </p>
- * <p> Author: Aervon </p>
+ * <p> Author: kyle.zhou </p>
  * <p> Date: 2019/9/28 </p>
  */
 public class Constants {
